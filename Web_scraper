@@ -1,0 +1,17 @@
+import requests
+from bs4 import BeautifulSoup
+
+page = requests.get("https://en.wikipedia.org/wiki/Lists_of_films")
+soup = BeautifulSoup(page.content,'html.parser')
+
+print(soup.title)                                 #Title of the Webpage
+l=soup.findAll(id='By_country_of_origin')         #Sub title
+print(l)
+
+
+line_count = 1
+for list in soup.findAll('a'):                    #Starting from 'a'
+   if line_count >= 265 and line_count<=389:      #This is the range from where we to exact our data
+      link=list['href']                           #To select the hyperlink
+      print(link)
+   line_count += 1
